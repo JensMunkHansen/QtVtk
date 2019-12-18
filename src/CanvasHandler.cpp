@@ -5,24 +5,31 @@
 #include <QQmlContext>
 #include <QQuickStyle>
 
+#include "config.h"
 #include "Model.h"
 #include "ProcessingEngine.h"
 #include "QVTKFramebufferObjectItem.h"
 #include "QVTKFramebufferObjectRenderer.h"
+#include "QVTKOpenGLWidget.h"
+
 #include "CanvasHandler.h"
 
 
 CanvasHandler::CanvasHandler(int argc, char **argv)
 {
+    QSurfaceFormat::setDefaultFormat(QVTKOpenGLWidget::defaultFormat());
 	QApplication app(argc, argv);
 	QQmlApplicationEngine engine;
-
+#ifdef _WIN32
+    engine.addImportPath(QTVTK_QML_DIR);
+#endif
 	app.setApplicationName("QtVTK");
 	app.setWindowIcon(QIcon(":/resources/bq.ico"));
     app.setOrganizationName("");
     app.setOrganizationDomain("");
 	// Register QML types
-	qmlRegisterType<QVTKFramebufferObjectItem>("QtVTK", 1, 0, "VtkFboItem");
+	int retval = qmlRegisterType<QVTKFramebufferObjectItem>("QtVTK", 1, 0, "VtkFboItem");
+
 
 	// Create classes instances
 	m_processingEngine = std::shared_ptr<ProcessingEngine>(new ProcessingEngine());

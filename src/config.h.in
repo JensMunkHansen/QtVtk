@@ -1,0 +1,10 @@
+/**
+ * @file   <config.h>
+ * @author Jens Munk Hansen <jens.munk.hansen@gmai.com>
+ * @date   Wed Dec 18 19:46:27 2014
+ *
+ * @brief  Auto-generated configuration file
+ *
+ *
+ */
+#cmakedefine QTVTK_QML_DIR "@QTVTK_QML_DIR@"

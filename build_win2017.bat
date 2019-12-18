@@ -9,10 +9,10 @@ set QTDIR=C:/Qt/Qt5.12.3/5.12.3/msvc2017_64
 
 mkdir build
 
-set PATH=%PATH%;"C:\Program Files\CMake\bin";%QTDIR%\bin
+set PATH="C:\Program Files\CMake\bin";%QTDIR%\bin;%PATH%
 set VTK_DIR=E:/code/bin/VTK
 
-cmake -H%~dp0 -B%~dp0\build -G "Visual Studio 15 2017 Win64"
+cmake -H%~dp0 -B%~dp0\build -G "Visual Studio 15 2017 Win64" -DCMAKE_PREFIX_PATH=%VTK_DIR%;%QTDIR%
 
 REM Create solution
 cd %~dp0\build

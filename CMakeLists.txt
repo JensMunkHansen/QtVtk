@@ -1,7 +1,3 @@
-foreach(path ${CMAKE_PREFIX_PATH})
-  message("Path: " ${path})
-endforeach(path)
-
 ###########
 # Project #
 ###########
