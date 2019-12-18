@@ -19,7 +19,8 @@ CanvasHandler::CanvasHandler(int argc, char **argv)
 
 	app.setApplicationName("QtVTK");
 	app.setWindowIcon(QIcon(":/resources/bq.ico"));
-
+    app.setOrganizationName("");
+    app.setOrganizationDomain("");
 	// Register QML types
 	qmlRegisterType<QVTKFramebufferObjectItem>("QtVTK", 1, 0, "VtkFboItem");
 

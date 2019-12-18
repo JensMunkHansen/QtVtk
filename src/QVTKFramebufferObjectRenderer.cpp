@@ -21,6 +21,7 @@
 #include "ProcessingEngine.h"
 #include "QVTKFramebufferObjectItem.h"
 #include "QVTKFramebufferObjectRenderer.h"
+#include "QVTKOpenGLNativeWidget.h"
 
 QVTKFramebufferObjectRenderer::QVTKFramebufferObjectRenderer()
 {

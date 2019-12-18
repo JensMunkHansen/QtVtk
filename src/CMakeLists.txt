@@ -25,7 +25,8 @@ endif()
 #########################
 
 # Find the Qt libraries
-set(CMAKE_PREFIX_PATH $ENV{QTDIR})
+list(APPEND CMAKE_PREFIX_PATH $ENV{QTDIR})
+list(APPEND CMAKE_PREFIX_PATH $ENV{VTK_DIR})
 
 find_package(Qt5Quick REQUIRED)
 find_package(Qt5Widgets REQUIRED)
