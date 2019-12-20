@@ -18,7 +18,6 @@ class CanvasHandler : public QObject
 	Q_PROPERTY(bool isModelSelected READ getIsModelSelected NOTIFY isModelSelectedChanged)
 	Q_PROPERTY(double modelPositionX READ getSelectedModelPositionX NOTIFY selectedModelPositionXChanged)
 	Q_PROPERTY(double modelPositionY READ getSelectedModelPositionY NOTIFY selectedModelPositionYChanged)
-
 public:
 	CanvasHandler(int argc, char **argv);
 
@@ -38,7 +37,6 @@ public:
 	Q_INVOKABLE void setModelColorR(const int colorR);
 	Q_INVOKABLE void setModelColorG(const int colorG);
 	Q_INVOKABLE void setModelColorB(const int colorB);
-
 public slots:
 	void startApplication() const;
 
@@ -54,6 +52,7 @@ private:
 
 	std::shared_ptr<ProcessingEngine> m_processingEngine;
 	QVTKFramebufferObjectItem *m_vtkFboItem = nullptr;
+    QObject *m_fileDialog = nullptr;
 
 	double m_previousWorldX = 0;
 	double m_previousWorldY = 0;

@@ -2,8 +2,10 @@
 #include <QDebug>
 #include <QIcon>
 #include <QQmlApplicationEngine>
+#include <QQmlProperty>
 #include <QQmlContext>
 #include <QQuickStyle>
+#include <QSettings>
 
 #include "config.h"
 #include "Model.h"
@@ -29,7 +31,6 @@ CanvasHandler::CanvasHandler(int argc, char **argv)
     app.setOrganizationDomain("");
 	// Register QML types
 	int retval = qmlRegisterType<QVTKFramebufferObjectItem>("QtVTK", 1, 0, "VtkFboItem");
-
 
 	// Create classes instances
 	m_processingEngine = std::shared_ptr<ProcessingEngine>(new ProcessingEngine());
@@ -67,6 +68,18 @@ CanvasHandler::CanvasHandler(int argc, char **argv)
 		return;
 	}
 
+    const QString DEFAULT_MODEL_DIR_KEY("default_model_dir");
+
+    QSettings MySettings;
+
+    m_fileDialog = rootObject->findChild<QObject*>("myFileDialog");
+    if (m_fileDialog) {
+      //      m_fileDialog->setProperty("folder", "file:///E:/");
+      QString tmp = MySettings.value(DEFAULT_MODEL_DIR_KEY).toString();
+      qDebug() << "folder: " << tmp;
+      m_fileDialog->setProperty("folder", QUrl::fromLocalFile(tmp));
+    }
+
 	int rc = app.exec();
 
 	qDebug() << "CanvasHandler::CanvasHandler: Execution finished with return code:" << rc;
@@ -98,6 +111,16 @@ void CanvasHandler::openModel(const QUrl &path) const
 	}
 
 	m_vtkFboItem->addModelFromFile(localFilePath);
+
+    QDir currentDir = QFileInfo(localFilePath.toString()).absoluteDir();
+    QString currentPath = currentDir.absolutePath();
+
+    const QString DEFAULT_MODEL_DIR_KEY("default_model_dir");
+    QSettings MySettings;
+    MySettings.setValue(DEFAULT_MODEL_DIR_KEY, currentPath);
+    qDebug() << "folder" << currentPath;
+
+    m_fileDialog->setProperty("folder", QUrl::fromLocalFile(currentPath));
 }
 
 bool CanvasHandler::isModelExtensionValid(const QUrl &modelPath) const

@@ -159,6 +159,7 @@ ApplicationWindow {
 
     FileDialog {
         id: openModelsFileDialog
+        objectName: "myFileDialog"
         visible: canvasHandler.showFileDialog
         title: "Import model"
         folder: shortcuts.documents
