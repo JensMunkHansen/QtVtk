@@ -6,10 +6,10 @@ if(NOT CONFIGURED)
         cmake_minimum_required(VERSION 3.4)
         project(QtVtk)
         set(PROJECT_SOURCE_DIR ../)
-        set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
-        set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
-        set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
-        link_directories(${PROJECT_SOURCE_DIR}/build)
+        set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+        set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+        set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+        link_directories(${PROJECT_SOURCE_DIR})
         # Indicate that previous configuration exists
         set(CONFIGURED TRUE)
 endif(NOT CONFIGURED)
@@ -17,10 +17,6 @@ endif(NOT CONFIGURED)
 #########################
 # External Dependencies #
 #########################
-
-# Find the Qt libraries
-#list(APPEND CMAKE_PREFIX_PATH $ENV{QTDIR})
-#list(APPEND CMAKE_PREFIX_PATH $ENV{VTK_DIR})
 
 find_package(Qt5Quick REQUIRED)
 find_package(Qt5Widgets REQUIRED)
@@ -38,7 +34,7 @@ include(${VTK_USE_FILE})
 
 # Headers directories
 include_directories(${PROJECT_SOURCE_DIR}
-	                ${PROJECT_SOURCE_DIR}/src
+  ${PROJECT_SOURCE_DIR}/src
 )
 
 # Generated headers directories
@@ -54,15 +50,15 @@ add_custom_target(QML_files SOURCES ${QML_DESKTOP})
 
 # Sources
 set (SOURCES
-	main.cpp
-	CanvasHandler.cpp
-    CommandModel.cpp
-    CommandModelAdd.cpp
-    CommandModelTranslate.cpp
-    Model.cpp
-	ProcessingEngine.cpp
-    QVTKFramebufferObjectItem.cpp
-    QVTKFramebufferObjectRenderer.cpp
+  main.cpp
+  CanvasHandler.cpp
+  CommandModel.cpp
+  CommandModelAdd.cpp
+  CommandModelTranslate.cpp
+  Model.cpp
+  ProcessingEngine.cpp
+  QVTKFramebufferObjectItem.cpp
+  QVTKFramebufferObjectRenderer.cpp
 )
 
 set(QTVTK_QML_DIR "${Qt5Core_DIR}/../../../qml")
@@ -73,9 +69,9 @@ qt5_add_resources(RESOURCES qml.qrc)
 
 # Build executable
 if (WIN32)
-    add_executable(QtVtk WIN32 ${HEADERS} ${SOURCES} ${RESOURCES})
+  add_executable(QtVtk WIN32 ${HEADERS} ${SOURCES} ${RESOURCES})
 else()
-    add_executable(QtVtk ${HEADERS} ${SOURCES} ${RESOURCES})
+  add_executable(QtVtk ${HEADERS} ${SOURCES} ${RESOURCES})
 endif()
 
 # Link to libraries
@@ -87,10 +83,10 @@ if (WIN32)
  message(${TOOL_QTENV2})
  message(${TOOL_WINDEPLOYQT})
  add_custom_command(TARGET QtVtk POST_BUILD
-       DEPENDS ${TOOL_WINDEPLOYQT} ${TOOL_QTENV2}
-       COMMAND ${TOOL_QTENV2}
-       COMMAND ${TOOL_WINDEPLOYQT} $<TARGET_FILE:QtVtk> $<$<CONFIG:Release>:--release>$<$<NOT:$<CONFIG:Release>>:--debug>
-       WORKING_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+   DEPENDS ${TOOL_WINDEPLOYQT} ${TOOL_QTENV2}
+   COMMAND ${TOOL_QTENV2}
+   COMMAND ${TOOL_WINDEPLOYQT} $<TARGET_FILE:QtVtk> $<$<CONFIG:Release>:--release>$<$<NOT:$<CONFIG:Release>>:--debug>
+   WORKING_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
  set(VTK_RUNTIME_DEPENDENCIES
    vtkCommonColor-8.2.dll
    vtkCommonCore-8.2.dll
