@@ -4,17 +4,16 @@
 
 class QVTKFramebufferObjectRenderer;
 
-class CommandModel
-{
-public:
-	CommandModel(){}
-	virtual ~CommandModel(){}
+class CommandModel {
+ public:
+  CommandModel() {}
+  virtual ~CommandModel() {}
 
-	virtual bool isReady() const = 0;
-	virtual void execute() = 0;
+  virtual bool isReady() const = 0;
+  virtual void execute() = 0;
 
-protected:
-	QVTKFramebufferObjectRenderer *m_vtkFboRenderer;
+ protected:
+  QVTKFramebufferObjectRenderer *m_vtkFboRenderer;
 };
 
 #endif // COMMANDMODEL_H

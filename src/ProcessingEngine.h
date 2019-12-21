@@ -16,26 +16,25 @@
 
 class Model;
 
-class ProcessingEngine
-{
-	public:
-		ProcessingEngine();
+class ProcessingEngine {
+ public:
+  ProcessingEngine();
 
-		const std::shared_ptr<Model>& addModel(const QUrl &modelFilePath);
+  const std::shared_ptr<Model>& addModel(const QUrl &modelFilePath);
 
-		void placeModel(Model &model) const;
+  void placeModel(Model &model) const;
 
-		void setModelsRepresentation(const int modelsRepresentationOption) const;
-		void setModelsOpacity(const double modelsOpacity) const;
-		void setModelsGouraudInterpolation(const bool enableGouraudInterpolation) const;
-		void updateModelsColor() const;
+  void setModelsRepresentation(const int modelsRepresentationOption) const;
+  void setModelsOpacity(const double modelsOpacity) const;
+  void setModelsGouraudInterpolation(const bool enableGouraudInterpolation) const;
+  void updateModelsColor() const;
 
-		std::shared_ptr<Model> getModelFromActor(const vtkSmartPointer<vtkActor> modelActor) const;
+  std::shared_ptr<Model> getModelFromActor(const vtkSmartPointer<vtkActor> modelActor) const;
 
-	private:
-		vtkSmartPointer<vtkPolyData> preprocessPolydata(const vtkSmartPointer<vtkPolyData> inputData) const;
+ private:
+  vtkSmartPointer<vtkPolyData> preprocessPolydata(const vtkSmartPointer<vtkPolyData> inputData) const;
 
-		std::vector<std::shared_ptr<Model>> m_models;
+  std::vector<std::shared_ptr<Model>> m_models;
 };
 
 #endif // PROCESSINGENGINE_H

@@ -13,30 +13,29 @@ class Model;
 class ProcessingEngine;
 class QVTKFramebufferObjectRenderer;
 
-class CommandModelAdd : public QThread, public CommandModel
-{
-	Q_OBJECT
+class CommandModelAdd : public QThread, public CommandModel {
+  Q_OBJECT
 
-public:
-	CommandModelAdd(QVTKFramebufferObjectRenderer *vtkFboRenderer, std::shared_ptr<ProcessingEngine> processingEngine, QUrl modelPath);
+ public:
+  CommandModelAdd(QVTKFramebufferObjectRenderer *vtkFboRenderer, std::shared_ptr<ProcessingEngine> processingEngine, QUrl modelPath);
 
-	void run() Q_DECL_OVERRIDE;
+  void run() Q_DECL_OVERRIDE;
 
-	bool isReady() const override;
-	void execute() override;
+  bool isReady() const override;
+  void execute() override;
 
-signals:
-	void ready();
-	void done();
+ signals:
+  void ready();
+  void done();
 
-private:
-	std::shared_ptr<ProcessingEngine> m_processingEngine;
-	std::shared_ptr<Model> m_model = nullptr;
-	QUrl m_modelPath;
-	double m_positionX;
-	double m_positionY;
+ private:
+  std::shared_ptr<ProcessingEngine> m_processingEngine;
+  std::shared_ptr<Model> m_model = nullptr;
+  QUrl m_modelPath;
+  double m_positionX;
+  double m_positionY;
 
-	bool m_ready = false;
+  bool m_ready = false;
 };
 
 #endif // COMMANDMODELADD_H
