@@ -26,7 +26,11 @@ class Model;
 class QVTKFramebufferObjectItem;
 class ProcessingEngine;
 
-class QVTKFramebufferObjectRenderer : public QObject, public QQuickFramebufferObject::Renderer, protected QOpenGLFunctions {
+
+class QVTKFramebufferObjectRenderer : public QObject,
+				      public QQuickFramebufferObject::Renderer,
+				      protected QOpenGLFunctions // OpenGL ES 2.0 API
+{
   Q_OBJECT
 
  public:
@@ -34,9 +38,9 @@ class QVTKFramebufferObjectRenderer : public QObject, public QQuickFramebufferOb
 
   void setProcessingEngine(const std::shared_ptr<ProcessingEngine> processingEngine);
 
-  virtual void synchronize(QQuickFramebufferObject *item);
-  virtual void render();
-  virtual void openGLInitState();
+  virtual void synchronize(QQuickFramebufferObject *item) override;
+  virtual void render() override;
+  void openGLInitState();
   QOpenGLFramebufferObject *createFramebufferObject(const QSize &size);
 
   void addModelActor(const std::shared_ptr<Model> model);
@@ -53,7 +57,7 @@ class QVTKFramebufferObjectRenderer : public QObject, public QQuickFramebufferOb
   void resetCamera();
   const bool screenToWorld(const int16_t screenX, const int16_t screenY, double worldPos[]);
 
- signals:
+ Q_SIGNALS:
   void isModelSelectedChanged();
 
   void selectedModelPositionXChanged();

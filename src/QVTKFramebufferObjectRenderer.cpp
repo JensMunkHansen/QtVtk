@@ -32,6 +32,8 @@ QVTKFramebufferObjectRenderer::QVTKFramebufferObjectRenderer() {
 
   // Interactor
   m_vtkRenderWindowInteractor = vtkSmartPointer<vtkGenericRenderWindowInteractor>::New();
+
+  // Disable message loop for interactor
   m_vtkRenderWindowInteractor->EnableRenderOff();
   m_vtkRenderWindow->SetInteractor(m_vtkRenderWindowInteractor);
 
@@ -104,6 +106,7 @@ void QVTKFramebufferObjectRenderer::synchronize(QQuickFramebufferObject *item) {
 void QVTKFramebufferObjectRenderer::render() {
   m_vtkRenderWindow->PushState();
   this->openGLInitState();
+  // Start rendering process for this frame
   m_vtkRenderWindow->Start();
 
   if (m_firstRender) {

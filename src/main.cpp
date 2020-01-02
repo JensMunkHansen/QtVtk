@@ -7,6 +7,8 @@ int main(int argc, char **argv) {
 
   // Fixes decimal point issue in vtkSTLReader
   putenv((char *)"LC_NUMERIC=C");
+
+  // _putenv_s("QML_BAD_GUI_RENDER_LOOP", "1");  
 #endif //LINUX
 
   CanvasHandler(argc, argv);
