@@ -24,6 +24,11 @@ find_package(Qt5Qml REQUIRED)
 find_package(Qt5QuickControls2 REQUIRED)
 find_package(Qt5OpenGL REQUIRED)
 
+
+if (NOT "${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+  add_definitions(-DQT_NO_DEBUG_OUTPUT)
+endif()
+
 # Instruct CMake to run moc automatically when needed
 set(CMAKE_AUTOMOC ON)
 

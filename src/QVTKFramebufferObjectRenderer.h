@@ -41,7 +41,7 @@ class QVTKFramebufferObjectRenderer : public QObject,
   virtual void synchronize(QQuickFramebufferObject *item) override;
   virtual void render() override;
   void openGLInitState();
-  QOpenGLFramebufferObject *createFramebufferObject(const QSize &size);
+  QOpenGLFramebufferObject *createFramebufferObject(const QSize &size) override;
 
   void addModelActor(const std::shared_ptr<Model> model);
 
