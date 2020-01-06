@@ -48,7 +48,7 @@ const std::shared_ptr<Model> &ProcessingEngine::addModel(const QUrl &modelFilePa
   // Create Model instance and insert it into the vector
   std::shared_ptr<Model> model = std::make_shared<Model>(preprocessedPolydata);
 
-  m_models.push_back(model);
+  m_models.push_back(model); // use .emplace_back(std:make_shared<Model>(new ))
 
   return m_models.back();
 }
