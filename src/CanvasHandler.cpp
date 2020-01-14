@@ -24,7 +24,7 @@ CanvasHandler::CanvasHandler(int argc, char **argv) {
 #ifdef _WIN32
   engine.addImportPath(QTVTK_QML_DIR);
 #endif
-  app.setApplicationName("QtVTK");
+  app.setApplicationName("QtQuickVTK");
   app.setWindowIcon(QIcon(":/resources/bq.ico"));
   app.setOrganizationName("Sexy Soft");
   app.setOrganizationDomain("www.sexysoft.com");
