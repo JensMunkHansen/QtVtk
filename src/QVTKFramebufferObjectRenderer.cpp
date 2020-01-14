@@ -15,6 +15,7 @@
 #include <vtkSTLReader.h>
 #include <vtkTextActor.h>
 #include <vtkTextProperty.h>
+#include <vtkTransform.h>
 
 #include "CommandModel.h"
 #include "Model.h"
@@ -259,6 +260,15 @@ void QVTKFramebufferObjectRenderer::initScene() {
   axes->GetXAxisCaptionActor2D()->GetCaptionTextProperty()->SetFontSize(axes_label_font_size);
   axes->GetYAxisCaptionActor2D()->GetCaptionTextProperty()->SetFontSize(axes_label_font_size);
   axes->GetZAxisCaptionActor2D()->GetCaptionTextProperty()->SetFontSize(axes_label_font_size);
+
+  // Move axes away from grid
+  vtkSmartPointer<vtkTransform> transform =
+    vtkSmartPointer<vtkTransform>::New();
+  transform->Translate(m_platformWidth / 2, m_platformWidth / 2, 0.0);
+
+  // The axes are positioned with a user transform
+  axes->SetUserTransform(transform);
+
   m_renderer->AddActor(axes);
 
   // Platform
