@@ -1,0 +1,48 @@
+@startuml
+participant QVTKFramebufferObjectRenderer as renderer
+participant VTK as vtk
+participant QOpenGLFunctions as ogl
+  activate renderer
+  renderer -> vtk : m_vtkRenderWindow->PushState()
+  activate vtk
+  renderer -> vtk : m_vtkRenderWindow->OpenGLInitState();
+  renderer -> vtk : m_vtkRenderWindow->MakeCurrent()
+  vtk -> renderer
+  deactivate vtk
+  renderer -> ogl : initializeOpenGLFunctions()
+  activate ogl
+  renderer -> ogl : glUseProgram(0)
+  ogl -> renderer
+  deactivate ogl
+  renderer -> vtk : m_vtkRenderWindow->Start()
+  activate vtk
+  vtk -> renderer
+  deactivate vtk
+  == Initialization ==
+  renderer -> renderer : initScene()
+  == Repetition ==
+  renderer -> vtk : m_vtkRenderWindowInteractor->InvokeEvent(vtkCommand)
+  activate vtk
+  note right
+    Invoke event such as mouse presses and button clicks
+  end note
+  vtk -> renderer
+  deactivate vtk
+  loop !m_vtkFboItem->isCommandsQueueEmpty()
+    renderer -> vtk : m_vtkFboItem->lockCommandsQueueMutex()
+    activate vtk
+    renderer -> vtk : command = m_vtkFboItem->getCommandsQueueFront()
+    renderer -> vtk : m_vtkFboItem->commandsQueuePop()
+    renderer -> vtk : m_vtkFboItem->unlockCommandsQueueMutex()
+    renderer -> vtk : command->execute()
+    vtk -> renderer
+    deactivate vtk
+  end
+
+  renderer -> vtk : m_vtkRenderWindow->Render();
+  activate vtk
+  renderer -> vtk : m_vtkRenderWindow->PopState();
+  renderer -> vtk : m_vtkFboItem->window()->resetOpenGLState();
+  vtk -> renderer
+  deactivate vtk
+@enduml

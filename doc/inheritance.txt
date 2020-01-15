@@ -1,0 +1,38 @@
+@startuml
+interface QQuickFramebufferObject {
+  QQuickFramebufferObject(QQuickItem* parent = nullptr)
+  {abstract} Renderer* createRenderer()
+}
+
+QQuickFramebufferObject <|-- QVTKFramebufferObjectItem
+
+class QVTKFramebufferObjectItem {
+  -QVTKFramebufferObjectRenderer* m_vtkFboRenderer
+  +Renderer* createRenderer()
+}
+
+interface QObject {
+}
+
+interface Renderer {
+ {abstract} QOpenGLFramebufferObject* createFramebufferObject(const QSize& size)
+ {abstract} void render()
+ {abstract} void synchronize()
+}
+
+QQuickFramebufferObject +-- Renderer
+
+class QVTKFramebufferObjectRenderer {
+  -QVTKFramebufferObjectItem* m_vtkFboItem = nullptr;
+  -vtkSmartPointer<vtkGenericOpenGLRenderWindow> m_vtkRenderWindow
+  -void openGLInitState()
+  +~Renderer()
+  +QOpenGLFramebufferObject *createFramebufferObject(const QSize &size)
+  +void synchronize(QQuickFramebufferObject *item)
+  +void render()
+}
+
+Renderer <|-- QVTKFramebufferObjectRenderer
+QObject <|-- QVTKFramebufferObjectRenderer
+
+@enduml
