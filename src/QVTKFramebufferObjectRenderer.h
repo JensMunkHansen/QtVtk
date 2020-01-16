@@ -133,7 +133,7 @@ class QVTKFramebufferObjectRenderer : public QObject,
   double getSelectedModelPositionX() const;
 
   /**
-   *
+   * getSelectedModelPositionY
    *
    *
    * @return
@@ -141,7 +141,7 @@ class QVTKFramebufferObjectRenderer : public QObject,
   double getSelectedModelPositionY() const;
 
   /**
-   *
+   * resetCamera
    *
    */
   void resetCamera();
