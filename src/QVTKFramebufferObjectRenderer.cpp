@@ -1,3 +1,13 @@
+/**
+ * @file   QVTKFramebufferObjectRenderer.cpp
+ * @author Jens Munk Hansen <jmh@debian9laptop.parknet.dk>
+ * @date   Thu Jan 16 23:37:35 2020
+ *
+ * @brief
+ *
+ *
+ */
+
 #include <queue>
 
 #include <QQuickWindow>

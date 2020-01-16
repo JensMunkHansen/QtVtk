@@ -1,3 +1,13 @@
+/**
+ * @file   QVTKFramebufferObjectItem.h
+ * @author Jens Munk Hansen <jmh@debian9laptop.parknet.dk>
+ * @date   Thu Jan 16 23:35:12 2020
+ *
+ * @brief
+ *
+ *
+ */
+
 #ifndef QVTKFRAMEBUFFEROBJECTITEM_H
 #define QVTKFRAMEBUFFEROBJECTITEM_H
 
@@ -19,29 +29,112 @@ class QVTKFramebufferObjectItem : public QQuickFramebufferObject {
   Q_OBJECT
 
  public:
+  /**
+   *
+   *
+   *
+   * @return
+   */
   QVTKFramebufferObjectItem();
 
+  /**
+   *
+   *
+   *
+   * @return
+   */
   Renderer *createRenderer() const Q_DECL_OVERRIDE;
-  void setVtkFboRenderer(QVTKFramebufferObjectRenderer*);
+
+  /**
+   *
+   *
+   * @param renderer
+   */
+  void setVtkFboRenderer(QVTKFramebufferObjectRenderer*  renderer);
+
+  /**
+   *
+   *
+   *
+   * @return
+   */
   bool isInitialized() const;
+
+  /**
+   *
+   *
+   * @param processingEngine
+   */
   void setProcessingEngine(const std::shared_ptr<ProcessingEngine> processingEngine);
 
-  // Model releated functions
+  /** @name Model releated functions
+   *
+   */
+  ///@{
   bool isModelSelected() const;
 
+  /**
+   *
+   *
+   *
+   * @return
+   */
   double getSelectedModelPositionX() const;
+
+  /**
+   *
+   *
+   *
+   * @return
+   */
   double getSelectedModelPositionY() const;
 
   void selectModel(const int screenX, const int screenY);
+
+  /**
+   *
+   *
+   *
+   * @return
+   */
   void resetModelSelection();
   void addModelFromFile(const QUrl &modelPath);
 
   void translateModel(CommandModelTranslate::TranslateParams_t &translateData, const bool inTransition);
+  ///@}
 
-  // Camera related functions
+  /** @name Camera related functions
+   *
+   */
+  ///@{
+
+  /**
+   *
+   *
+   *
+   * @return
+   */
   void wheelEvent(QWheelEvent *e) override;
+  /**
+   *
+   *
+   *
+   * @return
+   */
   void mousePressEvent(QMouseEvent *e) override;
+  /**
+   *
+   *
+   *
+   * @return
+   */
   void mouseReleaseEvent(QMouseEvent *e) override;
+  /**
+   *
+   *
+   *
+   * @return
+   */
   void mouseMoveEvent(QMouseEvent *e) override;
 
   QMouseEvent *getLastMouseLeftButton();
@@ -50,12 +143,49 @@ class QVTKFramebufferObjectItem : public QQuickFramebufferObject {
   QWheelEvent *getLastWheelEvent();
 
   void resetCamera();
+  ///@}
 
+  /**
+   *
+   *
+   *
+   * @return
+   */
   int getModelsRepresentation() const;
+  /**
+   *
+   *
+   *
+   * @return
+   */
   double getModelsOpacity() const;
+  /**
+   *
+   *
+   *
+   * @return
+   */
   bool getGourauInterpolation() const;
+  /**
+   *
+   *
+   *
+   * @return
+   */
   int getModelColorR() const;
+  /**
+   *
+   *
+   *
+   * @return
+   */
   int getModelColorG() const;
+  /**
+   *
+   *
+   *
+   * @return
+   */
   int getModelColorB() const;
 
   void setModelsRepresentation(const int representationOption);
@@ -65,8 +195,25 @@ class QVTKFramebufferObjectItem : public QQuickFramebufferObject {
   void setModelColorG(const int colorG);
   void setModelColorB(const int colorB);
 
+  /**
+   *
+   *
+   *
+   * @return
+   */
   CommandModel* getCommandsQueueFront() const;
+  /**
+   *
+   *
+   *
+   */
   void commandsQueuePop();
+  /**
+   *
+   *
+   *
+   * @return
+   */
   bool isCommandsQueueEmpty() const;
   void lockCommandsQueueMutex();
   void unlockCommandsQueueMutex();

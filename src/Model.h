@@ -1,3 +1,13 @@
+/**
+ * @file   Model.h
+ * @author Jens Munk Hansen <jmh@debian9laptop.parknet.dk>
+ * @date   Thu Jan 16 23:53:15 2020
+ *
+ * @brief
+ *
+ *
+ */
+
 #ifndef MODEL_H
 #define MODEL_H
 
@@ -17,22 +27,89 @@ class Model : public QObject {
   Q_OBJECT
 
  public:
+  /**
+   *
+   *
+   * @param modelData
+   *
+   * @return
+   */
   Model(vtkSmartPointer<vtkPolyData> modelData);
 
+  /**
+   *
+   *
+   *
+   * @return
+   */
   const vtkSmartPointer<vtkActor>& getModelActor() const;
 
+  /**
+   *
+   *
+   *
+   * @return
+   */
   double getPositionX();
+
+  /**
+   *
+   *
+   *
+   * @return
+   */
   double getPositionY();
 
+  /**
+   *
+   *
+   * @param x
+   * @param y
+   */
   void translateToPosition(const double x, const double y);
 
+  /**
+   *
+   *
+   * @param selected
+   */
   void setSelected(const bool selected);
+
+  /**
+   *
+   *
+   * @param selectedModelColor
+   */
   static void setSelectedModelColor(const QColor &selectedModelColor);
 
+  /**
+   *
+   *
+   *
+   * @return
+   */
   const double getMouseDeltaX() const;
+
+  /**
+   *
+   *
+   *
+   * @return
+   */
   const double getMouseDeltaY() const;
+
+  /**
+   *
+   *
+   * @param deltaX
+   * @param deltaY
+   */
   void setMouseDeltaXY(const double deltaX, const double deltaY);
 
+  /**
+   *
+   *
+   */
   void updateModelColor();
 
  signals:
@@ -40,9 +117,25 @@ class Model : public QObject {
   void positionYChanged(const double positionY);
 
  private:
+  /**
+   *
+   *
+   * @param positionX
+   */
   void setPositionX(const double positionX);
+
+  /**
+   *
+   *
+   * @param positionY
+   */
   void setPositionY(const double positionY);
 
+  /**
+   *
+   *
+   * @param color
+   */
   void setColor(const QColor &color);
 
   static QColor m_defaultModelColor;

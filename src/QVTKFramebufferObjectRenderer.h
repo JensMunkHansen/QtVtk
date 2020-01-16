@@ -1,3 +1,13 @@
+/**
+ * @file   QVTKFramebufferObjectRenderer.h
+ * @author Jens Munk Hansen <jmh@debian9laptop.parknet.dk>
+ * @date   Thu Jan 16 23:31:25 2020
+ *
+ * @brief
+ *
+ *
+ */
+
 #ifndef QVTKFRAMEBUFFEROBJECTRENDERER_H
 #define QVTKFRAMEBUFFEROBJECTRENDERER_H
 
@@ -34,27 +44,117 @@ class QVTKFramebufferObjectRenderer : public QObject,
   Q_OBJECT
 
  public:
+  /**
+   *
+   *
+   *
+   * @return
+   */
   QVTKFramebufferObjectRenderer();
 
+  /**
+   *
+   *
+   * @param processingEngine
+   */
   void setProcessingEngine(const std::shared_ptr<ProcessingEngine> processingEngine);
 
+  /**
+   *
+   *
+   * @param item
+   */
   virtual void synchronize(QQuickFramebufferObject *item) override;
+
+  /**
+   * render()
+   *
+   */
   virtual void render() override;
+
+  /**
+   *
+   *
+   */
   void openGLInitState();
+
+  /**
+   *
+   *
+   * @param size
+   *
+   * @return
+   */
   QOpenGLFramebufferObject *createFramebufferObject(const QSize &size) override;
 
+  /**
+   *
+   *
+   * @param model
+   */
   void addModelActor(const std::shared_ptr<Model> model);
 
+  /**
+   *
+   *
+   *
+   * @return
+   */
   std::shared_ptr<Model> getSelectedModel() const;
+
+  /**
+   *
+   *
+   *
+   * @return
+   */
   bool isModelSelected() const;
 
+  /**
+   *
+   *
+   * @param positionX
+   */
   void setSelectedModelPositionX(const double positionX);
+
+  /**
+   *
+   *
+   * @param positionY
+   */
   void setSelectedModelPositionY(const double positionY);
 
+  /**
+   *
+   *
+   *
+   * @return
+   */
   double getSelectedModelPositionX() const;
+
+  /**
+   *
+   *
+   *
+   * @return
+   */
   double getSelectedModelPositionY() const;
 
+  /**
+   *
+   *
+   */
   void resetCamera();
+
+  /**
+   *
+   *
+   * @param screenX
+   * @param screenY
+   * @param worldPos
+   *
+   * @return
+   */
   const bool screenToWorld(const int16_t screenX, const int16_t screenY, double worldPos[]);
 
  Q_SIGNALS:
@@ -64,15 +164,65 @@ class QVTKFramebufferObjectRenderer : public QObject,
   void selectedModelPositionYChanged();
 
  private:
+  /**
+   * initScene()
+   *
+   */
   void initScene();
+
+  /**
+   *
+   *
+   */
   void generatePlatform();
+
+  /**
+   *
+   *
+   */
   void updatePlatform();
 
+  /**
+   *
+   *
+   * @param x
+   * @param y
+   */
   void selectModel(const int16_t x, const int16_t y);
+
+  /**
+   *
+   *
+   */
   void clearSelectedModel();
+
+  /**
+   *
+   *
+   * @param isModelSelected
+   */
   void setIsModelSelected(const bool isModelSelected);
 
+  /**
+   *
+   *
+   * @param x1
+   * @param y1
+   * @param z1
+   * @param x2
+   * @param y2
+   * @param z2
+   * @param points
+   * @param cells
+   */
   void createLine(const double x1, const double y1, const double z1, const double x2, const double y2, const double z2, vtkSmartPointer<vtkPoints> points, vtkSmartPointer<vtkCellArray> cells);
+
+  /**
+   *
+   *
+   *
+   * @return
+   */
   std::shared_ptr<Model> getSelectedModelNoLock() const;
 
   std::shared_ptr<ProcessingEngine> m_processingEngine;
