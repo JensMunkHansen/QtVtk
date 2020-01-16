@@ -148,6 +148,7 @@ if (WIN32)
    endif()
  endforeach(DLL)
 
+  # ${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION:QtVtk>
   foreach(DLL ${VTK_RUNTIME_LIBRARIES})
     add_custom_command(TARGET QtVtk POST_BUILD
       COMMAND ${CMAKE_COMMAND} -E copy_if_different

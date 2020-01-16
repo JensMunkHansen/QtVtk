@@ -11,7 +11,7 @@ ApplicationWindow {
     minimumWidth: 1024
     minimumHeight: 700
     visible: true
-    title: "QtVTK"
+    title: "QtQuickVTK"
 
     Material.primary: Material.Indigo
     Material.accent: Material.LightBlue

@@ -100,10 +100,10 @@ class QVTKFramebufferObjectRenderer : public QObject,
   vtkSmartPointer<vtkActor> m_platformModelActor;
   vtkSmartPointer<vtkActor> m_platformGridActor;
 
-  double m_platformWidth = 200.0;
-  double m_platformDepth = 200.0;
-  double m_platformHeight = 200.0;
-  double m_platformThickness = 2.0;
+  double m_platformWidth = 400.0;
+  double m_platformDepth = 400.0;
+  double m_platformHeight = 400.0;
+  double m_platformThickness = 4.0;
   double m_gridBottomHeight = 0.15;
   uint16_t m_gridSize = 10;
 
