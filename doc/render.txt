@@ -1,11 +1,13 @@
 @startuml
+actor User as user
 participant QVTKFramebufferObjectRenderer as renderer
 participant VTK as vtk
 participant QOpenGLFunctions as ogl
+  user -> renderer : QVTKFramebufferObjectRenderer::render()
   activate renderer
   renderer -> vtk : m_vtkRenderWindow->PushState()
   activate vtk
-  renderer -> vtk : m_vtkRenderWindow->OpenGLInitState();
+  renderer -> vtk : m_vtkRenderWindow->OpenGLInitState()
   renderer -> vtk : m_vtkRenderWindow->MakeCurrent()
   vtk -> renderer
   deactivate vtk
@@ -45,4 +47,6 @@ participant QOpenGLFunctions as ogl
   renderer -> vtk : m_vtkFboItem->window()->resetOpenGLState();
   vtk -> renderer
   deactivate vtk
+  renderer -> user
+  deactivate renderer
 @enduml
