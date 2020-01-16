@@ -58,7 +58,7 @@ class CommandModelAdd : public QThread, public CommandModel {
    */
   void execute() override;
 
- signals:
+ Q_SIGNALS:
   void ready();
   void done();
 

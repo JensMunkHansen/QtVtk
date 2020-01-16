@@ -112,7 +112,7 @@ class Model : public QObject {
    */
   void updateModelColor();
 
- signals:
+ Q_SIGNALS:
   void positionXChanged(const double positionX);
   void positionYChanged(const double positionY);
 

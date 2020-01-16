@@ -137,11 +137,42 @@ class QVTKFramebufferObjectItem : public QQuickFramebufferObject {
    */
   void mouseMoveEvent(QMouseEvent *e) override;
 
+  /**
+   *
+   *
+   *
+   * @return
+   */
   QMouseEvent *getLastMouseLeftButton();
+
+  /**
+   *
+   *
+   *
+   * @return
+   */
   QMouseEvent *getLastMouseButton();
+
+  /**
+   *
+   *
+   *
+   * @return
+   */
   QMouseEvent *getLastMoveEvent();
+
+  /**
+   *
+   *
+   *
+   * @return
+   */
   QWheelEvent *getLastWheelEvent();
 
+  /**
+   *
+   *
+   */
   void resetCamera();
   ///@}
 
@@ -188,11 +219,46 @@ class QVTKFramebufferObjectItem : public QQuickFramebufferObject {
    */
   int getModelColorB() const;
 
+  /**
+   *
+   *
+   * @param representationOption
+   */
   void setModelsRepresentation(const int representationOption);
+
+  /**
+   *
+   *
+   * @param opacity
+   */
   void setModelsOpacity(const double opacity);
+
+  /**
+   *
+   *
+   * @param gouraudInterpolation
+   */
   void setGouraudInterpolation(const bool gouraudInterpolation);
+
+  /**
+   *
+   *
+   * @param colorR
+   */
   void setModelColorR(const int colorR);
+
+  /**
+   *
+   *
+   * @param colorG
+   */
   void setModelColorG(const int colorG);
+
+  /**
+   *
+   *
+   * @param colorB
+   */
   void setModelColorB(const int colorB);
 
   /**
@@ -215,26 +281,45 @@ class QVTKFramebufferObjectItem : public QQuickFramebufferObject {
    * @return
    */
   bool isCommandsQueueEmpty() const;
+
+  /**
+   *
+   *
+   */
   void lockCommandsQueueMutex();
+
+  /**
+   *
+   *
+   */
   void unlockCommandsQueueMutex();
 
- signals:
+ Q_SIGNALS:
   void rendererInitialized();
 
   void isModelSelectedChanged();
+
   void selectedModelPositionXChanged();
+
   void selectedModelPositionYChanged();
 
   void addModelFromFileDone();
+
   void addModelFromFileError(QString error);
 
  private:
+  /**
+   *
+   *
+   * @param command
+   */
   void addCommand(CommandModel* command);
 
   QVTKFramebufferObjectRenderer *m_vtkFboRenderer = nullptr;
   std::shared_ptr<ProcessingEngine> m_processingEngine;
 
   std::queue<CommandModel*> m_commandsQueue;
+
   std::mutex m_commandsQueueMutex;
 
   std::shared_ptr<QMouseEvent> m_lastMouseLeftButton;

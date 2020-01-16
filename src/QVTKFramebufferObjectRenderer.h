@@ -159,7 +159,6 @@ class QVTKFramebufferObjectRenderer : public QObject,
 
  Q_SIGNALS:
   void isModelSelectedChanged();
-
   void selectedModelPositionXChanged();
   void selectedModelPositionYChanged();
 
@@ -215,7 +214,9 @@ class QVTKFramebufferObjectRenderer : public QObject,
    * @param points
    * @param cells
    */
-  void createLine(const double x1, const double y1, const double z1, const double x2, const double y2, const double z2, vtkSmartPointer<vtkPoints> points, vtkSmartPointer<vtkCellArray> cells);
+  void createLine(const double x1, const double y1, const double z1,
+                  const double x2, const double y2, const double z2,
+                  vtkSmartPointer<vtkPoints> points, vtkSmartPointer<vtkCellArray> cells);
 
   /**
    *
@@ -226,7 +227,9 @@ class QVTKFramebufferObjectRenderer : public QObject,
   std::shared_ptr<Model> getSelectedModelNoLock() const;
 
   std::shared_ptr<ProcessingEngine> m_processingEngine;
+
   QVTKFramebufferObjectItem *m_vtkFboItem = nullptr;
+
   vtkSmartPointer<vtkGenericOpenGLRenderWindow> m_vtkRenderWindow;
   vtkSmartPointer<vtkRenderer> m_renderer;
   vtkSmartPointer<vtkGenericRenderWindowInteractor> m_vtkRenderWindowInteractor;
@@ -242,7 +245,10 @@ class QVTKFramebufferObjectRenderer : public QObject,
 
   std::shared_ptr<QMouseEvent> m_mouseLeftButton = nullptr;
   std::shared_ptr<QMouseEvent> m_mouseEvent = nullptr;
+
+  ///<
   std::shared_ptr<QMouseEvent> m_moveEvent = nullptr;
+
   std::shared_ptr<QWheelEvent> m_wheelEvent = nullptr;
 
   vtkSmartPointer<vtkCubeSource> m_platformModel;

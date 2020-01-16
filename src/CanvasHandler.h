@@ -1,3 +1,12 @@
+/**
+ * @file   CanvasHandler.h
+ * @author Jens Munk Hansen <jmh@debian9laptop.parknet.dk>
+ * @date   Fri Jan 17 00:01:31 2020
+ *
+ * @brief
+ *
+ *
+ */
 #ifndef CANVASHANDLER_H
 #define CANVASHANDLER_H
 
@@ -13,21 +22,61 @@ class QVTKFramebufferObjectItem;
 class CanvasHandler : public QObject {
   Q_OBJECT
 
+  /**
+   *
+   *
+   *
+   * @return
+   */
   Q_PROPERTY(bool showFileDialog MEMBER m_showFileDialog NOTIFY showFileDialogChanged)
+
   Q_PROPERTY(bool isModelSelected READ getIsModelSelected NOTIFY isModelSelectedChanged)
   Q_PROPERTY(double modelPositionX READ getSelectedModelPositionX NOTIFY selectedModelPositionXChanged)
   Q_PROPERTY(double modelPositionY READ getSelectedModelPositionY NOTIFY selectedModelPositionYChanged)
  public:
+  /**
+   *
+   *
+   * @param argc
+   * @param argv
+   *
+   * @return
+   */
   CanvasHandler(int argc, char **argv);
 
+  /**
+   *
+   *
+   * @param path
+   */
   Q_INVOKABLE void openModel(const QUrl &path) const;
 
   Q_INVOKABLE void mousePressEvent(const int button, const int mouseX, const int mouseY) const;
   Q_INVOKABLE void mouseMoveEvent(const int button, const int mouseX, const int mouseY);
   Q_INVOKABLE void mouseReleaseEvent(const int button, const int mouseX, const int mouseY);
 
+  /**
+   *
+   *
+   *
+   * @return
+   */
   bool getIsModelSelected() const;
+
+  /**
+   *
+   *
+   *
+   * @return
+   */
   double getSelectedModelPositionX() const;
+
+  /**
+   *
+   *
+   *
+   * @return
+   */
   double getSelectedModelPositionY() const;
 
   Q_INVOKABLE void setModelsRepresentation(const int representationOption);
