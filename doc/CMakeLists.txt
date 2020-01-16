@@ -1,0 +1,24 @@
+find_package(Doxygen 1.8.13)
+
+if (UNIX OR CYGWIN)
+  set( LATEX_CMD_NAME "${PROJECT_SOURCE_DIR}/bin/latex2")
+else()
+  set( LATEX_CMD_NAME "${PROJECT_SOURCE_DIR}/bin/latex2.bat")
+endif()
+
+# Consider using USE_MATHJAX
+set(DOXYGEN_GENERATE_HTML YES)
+set(DOXYGEN_GENERATE_MAN NO)
+set(DOXYGEN_EXTRA_PACKAGES amsmath amsfonts bbm)
+set(DOXYGEN_LATEX_CMD_NAME ${LATEX_CMD_NAME})
+set(DOXYGEN_USE_PDFLATEX NO)
+set(DOXYGEN_CALL_GRAPH YES)
+set(DOXYGEN_CALLER_GRAPH YES)
+set(DOXYGEN_EXTRACT_PRIVATE YES)
+
+doxygen_add_docs(
+  doc
+  ${PROJECT_SOURCE_DIR}/src
+  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+  COMMENT "Generate documentation"
+)
