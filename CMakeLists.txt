@@ -19,3 +19,4 @@ set(CONFIGURED TRUE)
 # Targets #
 ###########
 add_subdirectory(src)
+add_subdirectory(resources)
