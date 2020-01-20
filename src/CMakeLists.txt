@@ -114,7 +114,9 @@ if (WIN32)
     vtkImagingSources-8.2.dll
     vtkInteractionStyle-8.2.dll
     vtkInteractionWidgets-8.2.dll
+    vtkIOCore-8.2.dll
     vtkIOImage-8.2.dll
+    vtkIOGeometry-8.2.dll
     vtkjpeg-8.2.dll
     vtkmetaio-8.2.dll
     vtkpng-8.2.dll
@@ -122,7 +124,12 @@ if (WIN32)
     vtkRenderingFreeType-8.2.dll
     vtkRenderingOpenGL2-8.2.dll
     vtkRenderingAnnotation-8.2.dll
+    vtkRenderingGL2PSOpenGL2-8.2.dll
+    vtkdoubleconversion-8.2.dll
+    vtkgl2ps-8.2.dll
     vtksys-8.2.dll
+    vtklzma-8.2.dll
+    vtklz4-8.2.dll
     vtktiff-8.2.dll
     vtkzlib-8.2.dll
   )
@@ -147,7 +154,6 @@ if (WIN32)
       PATHS "${VTK_DIR}/bin/Debug"
       NO_DEFAULT_PATH)
     if (FOUND_DLL)
-      message(${FOUND_DLL})
       list(APPEND VTK_RUNTIME_LIBRARIES_DEBUG ${FOUND_DLL})
     endif()
   endforeach(DLL)
@@ -155,12 +161,16 @@ if (WIN32)
   foreach(DLL ${VTK_RUNTIME_LIBRARIES})
     add_custom_command(TARGET QtVtk POST_BUILD
       COMMAND ${CMAKE_COMMAND} -E
-       $<$<CONFIG:Release>:copy_if_different "${DLL}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" > $<$<NOT:$<CONFIG:Release>>:echo "" >)
+      $<$<NOT:$<CONFIG:Release>>:echo>
+      $<$<NOT:$<CONFIG:Release>>:"omitted">
+      copy_if_different "${DLL}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIGURATION:MRUSViewer>")
   endforeach(DLL)
 
   foreach(DLL ${VTK_RUNTIME_LIBRARIES_DEBUG})
     add_custom_command(TARGET QtVtk POST_BUILD
       COMMAND ${CMAKE_COMMAND} -E
-      $<$<NOT:$<CONFIG:Release>>:copy_if_different "${DLL}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" > $<$<CONFIG:Release>:echo "" >)
+      $<$<CONFIG:Release>:echo>
+      $<$<CONFIG:Release>:"omitted">
+      copy_if_different "${DLL}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIGURATION:MRUSViewer>")
   endforeach(DLL)
 endif()
