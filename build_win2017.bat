@@ -20,16 +20,4 @@ cd %~dp0\build
 REM Build solution
 msbuild QtVtk.sln /p:Configuration=Release
 
-REM  /verbosity:diagnostic
-REM cd ..
-
-REM Go to output directory
-REM cd %~dp0\build\gui\Release
-
-REM Deploy all necessary DLL's to output directory.
-REM set CURRENTDRIVE=%CD:~0,2%
-REM %QTDIR%\bin\qtenv2.bat
-REM cd /D %CURRENTDRIVE%%~dp0\build\gui\Release
-REM %QTDIR%\bin\windeployqt.exe SofusUI.exe
-
-REM cd %~dp0
+cd %~dp0
