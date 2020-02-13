@@ -77,11 +77,17 @@ target_link_libraries(QtVtk Qt5::Quick Qt5::Widgets Qt5::Qml Qt5::QuickControls2
 if (WIN32)
   find_program(TOOL_WINDEPLOYQT NAMES windeployqt PATHS "${Qt5Core_DIR}/../../../bin")
   find_program(TOOL_QTENV2 NAMES qtenv2.bat PATHS "${Qt5Core_DIR}/../../../bin")
-  add_custom_command(TARGET QtVtk POST_BUILD
-    DEPENDS ${TOOL_WINDEPLOYQT} ${TOOL_QTENV2}
-    COMMAND ${TOOL_QTENV2}
-    COMMAND ${TOOL_WINDEPLOYQT} $<TARGET_FILE:QtVtk> $<$<CONFIG:Release>:--release>$<$<NOT:$<CONFIG:Release>>:--debug>
-    WORKING_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+
+  if (0)
+    add_custom_command(TARGET QtVtk POST_BUILD
+      DEPENDS ${TOOL_WINDEPLOYQT} ${TOOL_QTENV2}
+      COMMAND ${TOOL_QTENV2}
+      COMMAND ${TOOL_WINDEPLOYQT} $<TARGET_FILE:QtVtk> $<$<CONFIG:Release>:--release>$<$<NOT:$<CONFIG:Release>>:--debug>
+      WORKING_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+  else()
+    windeployqt(QtVtk ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+  endif()
+
   set(VTK_RUNTIME_DEPENDENCIES
     vtkCommonColor-8.2.dll
     vtkCommonCore-8.2.dll
@@ -165,6 +171,10 @@ if (WIN32)
       $<$<NOT:$<CONFIG:Release>>:"omitted">
       copy_if_different "${DLL}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIGURATION:MRUSViewer>")
   endforeach(DLL)
+
+  # Consider using
+  # string(REPLACE "Release" "Debug" VTK_RUNTIME_DEPENDENCIES "${VTK_RUNTIME_DEPENDENCIES}")
+
 
   foreach(DLL ${VTK_RUNTIME_LIBRARIES_DEBUG})
     add_custom_command(TARGET QtVtk POST_BUILD

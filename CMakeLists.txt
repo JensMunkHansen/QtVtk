@@ -4,6 +4,13 @@
 cmake_minimum_required(VERSION 3.4)
 project(QtVtk)
 
+# Add path for custom modules
+set(CMAKE_MODULE_PATH
+  ${CMAKE_MODULE_PATH}
+  "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+include(deploy_qt_windows)
+
 #######################
 # Folder organisation #
 #######################
