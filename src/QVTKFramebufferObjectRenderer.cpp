@@ -320,7 +320,13 @@ void QVTKFramebufferObjectRenderer::generatePlatform() {
   m_platformGridActor->GetProperty()->SetColor(0.45, 0.45, 0.45);
   m_platformGridActor->GetProperty()->SetOpacity(1);
   m_platformGridActor->PickableOff();
+
+  // JEM
+  m_platformGridActor->GetProperty()->SetRenderLinesAsTubes(true);
+  m_platformGridActor->GetProperty()->SetRenderPointsAsSpheres(true);
+
   m_renderer->AddActor(m_platformGridActor);
+
 
   this->updatePlatform();
 }
@@ -537,3 +543,4 @@ void QVTKFramebufferObjectRenderer::resetCamera() {
   m_renderer->GetActiveCamera()->SetViewUp(0.0, 0.0, 1.0);
   m_renderer->ResetCameraClippingRange();
 }
+

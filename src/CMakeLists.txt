@@ -78,7 +78,7 @@ if (WIN32)
   find_program(TOOL_WINDEPLOYQT NAMES windeployqt PATHS "${Qt5Core_DIR}/../../../bin")
   find_program(TOOL_QTENV2 NAMES qtenv2.bat PATHS "${Qt5Core_DIR}/../../../bin")
 
-  if (0)
+  if (1)
     add_custom_command(TARGET QtVtk POST_BUILD
       DEPENDS ${TOOL_WINDEPLOYQT} ${TOOL_QTENV2}
       COMMAND ${TOOL_QTENV2}

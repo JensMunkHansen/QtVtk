@@ -9,7 +9,7 @@ set(CMAKE_MODULE_PATH
   ${CMAKE_MODULE_PATH}
   "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-include(deploy_qt_windows)
+# include(deploy_qt_windows)
 
 #######################
 # Folder organisation #
