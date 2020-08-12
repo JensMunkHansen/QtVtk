@@ -128,7 +128,7 @@ class QVTKFramebufferObjectItem : public QQuickFramebufferObject {
    *
    * @return
    */
-  void mouseReleaseEvent(QMouseEvent *e) override;
+  void mouseReleaseEvent(QMouseEvent *e) Q_DECL_OVERRIDE;
   /**
    *
    *
@@ -336,3 +336,4 @@ class QVTKFramebufferObjectItem : public QQuickFramebufferObject {
 };
 
 #endif // QVTKFRAMEBUFFEROBJECTITEM_H
+

@@ -25,6 +25,7 @@ ApplicationWindow {
             objectName: "vtkFboItem"
             anchors.fill: parent
 
+            /*
             MouseArea {
                 acceptedButtons: Qt.LeftButton
                 anchors.fill: parent
@@ -39,6 +40,7 @@ ApplicationWindow {
                     canvasHandler.mouseReleaseEvent(pressedButtons, mouseX, mouseY);
                 }
             }
+            */
         }
 
         Button {

@@ -169,7 +169,7 @@ if (WIN32)
       COMMAND ${CMAKE_COMMAND} -E
       $<$<NOT:$<CONFIG:Release>>:echo>
       $<$<NOT:$<CONFIG:Release>>:"omitted">
-      copy_if_different "${DLL}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIGURATION:MRUSViewer>")
+      copy_if_different "${DLL}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
   endforeach(DLL)
 
   # Consider using
@@ -181,6 +181,6 @@ if (WIN32)
       COMMAND ${CMAKE_COMMAND} -E
       $<$<CONFIG:Release>:echo>
       $<$<CONFIG:Release>:"omitted">
-      copy_if_different "${DLL}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIGURATION:MRUSViewer>")
+      copy_if_different "${DLL}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
   endforeach(DLL)
 endif()
